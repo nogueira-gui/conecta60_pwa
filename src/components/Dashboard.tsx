@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { 
   Heart, 
   MessageCircle, 
@@ -7,7 +8,8 @@ import {
   Shield, 
   HelpCircle,
   Settings,
-  Users
+  Users,
+  Bot
 } from 'lucide-react';
 
 interface DashboardProps {
@@ -44,32 +46,34 @@ function MenuItem({ icon, title, description, onClick, color }: MenuItemProps) {
 }
 
 export function Dashboard({ user }: DashboardProps) {
+  const navigate = useNavigate();
+
   const menuItems = [
     {
       icon: <Heart className="h-12 w-12 text-white" />,
       title: 'Saúde',
       description: 'Consultas e medicamentos',
-      onClick: () => alert('Módulo de Saúde (Sprint 2)'),
+      onClick: () => navigate('/saude'),
       color: 'bg-green-500 hover:bg-green-600'
     },
     {
       icon: <MessageCircle className="h-12 w-12 text-white" />,
       title: 'Conversar',
       description: 'Família e amigos',
-      onClick: () => alert('Módulo de Comunicação (Sprint 2)'),
+      onClick: () => navigate('/comunicacao'),
       color: 'bg-blue-500 hover:bg-blue-600'
+    },
+    {
+      icon: <Bot className="h-12 w-12 text-white" />,
+      title: 'Chat IA',
+      description: 'Assistente virtual',
+      onClick: () => navigate('/chat-ia'),
+      color: 'bg-purple-500 hover:bg-purple-600'
     },
     {
       icon: <Phone className="h-12 w-12 text-white" />,
       title: 'Ligar',
       description: 'Contatos importantes',
-      onClick: () => alert('Funcionalidade em desenvolvimento'),
-      color: 'bg-purple-500 hover:bg-purple-600'
-    },
-    {
-      icon: <Calendar className="h-12 w-12 text-white" />,
-      title: 'Agenda',
-      description: 'Compromissos do dia',
       onClick: () => alert('Funcionalidade em desenvolvimento'),
       color: 'bg-orange-500 hover:bg-orange-600'
     }
@@ -149,10 +153,10 @@ export function Dashboard({ user }: DashboardProps) {
         </div>
 
         {/* Mensagem de Status da Sprint */}
-        <div className="bg-blue-600 rounded-2xl shadow-lg p-8 mt-8 text-center">
-          <h3 className="text-2xl font-bold text-white mb-4">Sprint 1 - Fundação</h3>
+        <div className="bg-gradient-to-r from-green-600 to-blue-600 rounded-2xl shadow-lg p-8 mt-8 text-center">
+          <h3 className="text-2xl font-bold text-white mb-4">Sprint 2 - Funcionalidades Core</h3>
           <p className="text-xl text-blue-100 mb-4">
-            Interface acessível e sistema de autenticação implementados com sucesso!
+            Módulos de saúde e comunicação implementados com IA integrada!
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <span className="bg-green-500 text-white px-4 py-2 rounded-full text-lg font-medium">
@@ -161,8 +165,17 @@ export function Dashboard({ user }: DashboardProps) {
             <span className="bg-green-500 text-white px-4 py-2 rounded-full text-lg font-medium">
               ✅ Autenticação Segura
             </span>
+            <span className="bg-green-500 text-white px-4 py-2 rounded-full text-lg font-medium">
+              ✅ Módulo de Saúde
+            </span>
+            <span className="bg-green-500 text-white px-4 py-2 rounded-full text-lg font-medium">
+              ✅ Módulo de Comunicação
+            </span>
+            <span className="bg-green-500 text-white px-4 py-2 rounded-full text-lg font-medium">
+              ✅ Chat com IA (Groq)
+            </span>
             <span className="bg-yellow-500 text-white px-4 py-2 rounded-full text-lg font-medium">
-              🔄 Sprint 2 em desenvolvimento
+              🔄 Sprint 3 em planejamento
             </span>
           </div>
         </div>
