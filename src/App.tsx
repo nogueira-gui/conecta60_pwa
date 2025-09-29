@@ -10,12 +10,14 @@ import ReminderForm from './components/Health/ReminderForm';
 import CommunicationDashboard from './components/Communication/CommunicationDashboard';
 import AIChat from './components/Communication/AIChat';
 import NavigationBreadcrumb from './components/NavigationBreadcrumb';
+import SupportDashboard from './components/Support/SupportDashboard';
 import { AuthService, User } from './utils/auth';
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [showSupport, setShowSupport] = useState(false);
 
   useEffect(() => {
     // Verifica se há usuário logado ao carregar a aplicação
@@ -49,7 +51,7 @@ function App() {
     <Router>
       <div className="min-h-screen bg-gray-50">
         <OfflineIndicator />
-        {user && <Header user={user} onLogout={handleLogout} />}
+        {user && <Header user={user} onLogout={handleLogout} onOpenSupport={() => setShowSupport(true)} />}
         {user && <NavigationBreadcrumb />}
         
         {!user ? (
@@ -60,7 +62,7 @@ function App() {
           />
         ) : (
           <Routes>
-            <Route path="/" element={<Dashboard user={user} />} />
+            <Route path="/" element={<Dashboard user={user} onOpenSupport={() => setShowSupport(true)} />} />
             <Route path="/saude" element={<HealthDashboard />} />
             <Route path="/saude/lembrete" element={<ReminderForm />} />
             <Route path="/comunicacao" element={<CommunicationDashboard />} />
@@ -70,6 +72,11 @@ function App() {
         )}
         
         <InstallPrompt />
+        
+        {/* Support Dashboard */}
+        {showSupport && (
+          <SupportDashboard onClose={() => setShowSupport(false)} />
+        )}
       </div>
     </Router>
   );

@@ -4,7 +4,6 @@ import {
   Heart, 
   MessageCircle, 
   Phone, 
-  Calendar, 
   Shield, 
   HelpCircle,
   Settings,
@@ -16,6 +15,7 @@ interface DashboardProps {
   user: {
     name: string;
   };
+  onOpenSupport?: () => void;
 }
 
 interface MenuItemProps {
@@ -45,7 +45,7 @@ function MenuItem({ icon, title, description, onClick, color }: MenuItemProps) {
   );
 }
 
-export function Dashboard({ user }: DashboardProps) {
+export function Dashboard({ user, onOpenSupport }: DashboardProps) {
   const navigate = useNavigate();
 
   const menuItems = [
@@ -91,7 +91,7 @@ export function Dashboard({ user }: DashboardProps) {
       icon: <HelpCircle className="h-10 w-10 text-white" />,
       title: 'Ajuda',
       description: 'Suporte 24 horas',
-      onClick: () => alert('Central de Ajuda (Sprint 3)'),
+      onClick: () => onOpenSupport?.(),
       color: 'bg-teal-500 hover:bg-teal-600'
     },
     {
@@ -154,28 +154,19 @@ export function Dashboard({ user }: DashboardProps) {
 
         {/* Mensagem de Status da Sprint */}
         <div className="bg-gradient-to-r from-green-600 to-blue-600 rounded-2xl shadow-lg p-8 mt-8 text-center">
-          <h3 className="text-2xl font-bold text-white mb-4">Sprint 2 - Funcionalidades Core</h3>
+          <h3 className="text-2xl font-bold text-white mb-4">Sprint 3 - Funcionalidades Core</h3>
           <p className="text-xl text-blue-100 mb-4">
-            Módulos de saúde e comunicação implementados com IA integrada!
+            Suporte 24 horas e Tutoriais!
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <span className="bg-green-500 text-white px-4 py-2 rounded-full text-lg font-medium">
-              ✅ Interface Acessível
+              ✅ Suporte 24 horas por IA
             </span>
             <span className="bg-green-500 text-white px-4 py-2 rounded-full text-lg font-medium">
-              ✅ Autenticação Segura
+              ✅ Suporte Humano
             </span>
             <span className="bg-green-500 text-white px-4 py-2 rounded-full text-lg font-medium">
-              ✅ Módulo de Saúde
-            </span>
-            <span className="bg-green-500 text-white px-4 py-2 rounded-full text-lg font-medium">
-              ✅ Módulo de Comunicação
-            </span>
-            <span className="bg-green-500 text-white px-4 py-2 rounded-full text-lg font-medium">
-              ✅ Chat com IA (Groq)
-            </span>
-            <span className="bg-yellow-500 text-white px-4 py-2 rounded-full text-lg font-medium">
-              🔄 Sprint 3 em planejamento
+              ✅ Tutoriais
             </span>
           </div>
         </div>
